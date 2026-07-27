@@ -49,27 +49,27 @@ def validate_svg_file(svg_path):
     })
 
     # Check 4: Multi-Project Container Nesting (#F6F6F6 fill, #BDBDBD stroke, or 'PROJECT:')
-    has_projects = ('#f6f6f6' in content.lower() or '#bdbdbd' in content.lower() or 'project:' in content.lower())
+    has_projects = (('#f6f6f6' in content.lower() and '#bdbdbd' in content.lower() and 'rx="8"' in content.lower()) or 'project:' in content.lower())
     results.append({
         "id": "gcp_project_containers",
         "pass": has_projects,
-        "evidence": "Found isolated GCP Project containers (#F6F6F6 / #BDBDBD)" if has_projects else "Missing GCP Project containers"
+        "evidence": "Found isolated GCP Project containers (#F6F6F6 / #BDBDBD / rx=8)" if has_projects else "Missing GCP Project containers"
     })
 
     # Check 5: Regional VPC Network Containers (#ECEFF1 fill, #90A4AE stroke, or 'REGION:')
-    has_vpcs = ('#eceff1' in content.lower() or '#90a4ae' in content.lower() or 'region:' in content.lower() or 'vpc' in content.lower())
+    has_vpcs = (('#eceff1' in content.lower() and '#90a4ae' in content.lower() and 'rx="6"' in content.lower()) or ('region:' in content.lower() or 'vpc' in content.lower()))
     results.append({
         "id": "regional_vpc_containers",
         "pass": has_vpcs,
-        "evidence": "Found Regional VPC Network containers (#ECEFF1 / #90A4AE)" if has_vpcs else "Missing Regional VPC Network containers"
+        "evidence": "Found Regional VPC Network containers (#ECEFF1 / #90A4AE / rx=6)" if has_vpcs else "Missing Regional VPC Network containers"
     })
 
     # Check 6: Subnet Isolation Zones (#EDE7F6 fill, #5E35B1 stroke, or 'Subnet:')
-    has_subnets = ('#ede7f6' in content.lower() or '#5e35b1' in content.lower() or 'subnet' in content.lower())
+    has_subnets = (('#ede7f6' in content.lower() and '#5e35b1' in content.lower() and 'rx="4"' in content.lower()) or 'subnet' in content.lower())
     results.append({
         "id": "subnet_isolation_zones",
         "pass": has_subnets,
-        "evidence": "Found Subnet Isolation Zones (#EDE7F6 / #5E35B1)" if has_subnets else "Missing Subnet Isolation Zones"
+        "evidence": "Found Subnet Isolation Zones (#EDE7F6 / #5E35B1 / rx=4)" if has_subnets else "Missing Subnet Isolation Zones"
     })
 
     # Check 7: Color Tokens (Compute, DB, Security, KMS)
@@ -91,7 +91,7 @@ def validate_svg_file(svg_path):
 
     # Check 8: PEP / PDP Arrow semantics
     has_pep_blue = bool(re.search(r'stroke="#(4285F4|4284F3|1A73E8)"', content, re.I))
-    has_pdp_dashed = 'stroke-dasharray' in content and ('7986cb' in content.lower() or 'dashed' in content.lower())
+    has_pdp_dashed = 'stroke-dasharray' in content and '7986cb' in content.lower()
     results.append({
         "id": "pep_pdp_semantics",
         "pass": has_pep_blue and has_pdp_dashed,
@@ -107,7 +107,7 @@ def validate_svg_file(svg_path):
     })
 
     # Check 10: VPC-SC Security Perimeter
-    has_perimeter = ('fce8e6' in content.lower() or 'ea4335' in content.lower()) and ('dash' in content.lower() or 'perimeter' in content.lower())
+    has_perimeter = ('fce8e6' in content.lower() and 'ea4335' in content.lower()) and ('dash' in content.lower() or 'perimeter' in content.lower())
     results.append({
         "id": "vpc_sc_perimeter",
         "pass": has_perimeter,

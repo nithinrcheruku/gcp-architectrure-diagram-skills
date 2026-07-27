@@ -105,7 +105,7 @@ The evaluation suite contains 12 scenario benchmarks covering 4 distinct typolog
 Run the automated validator on generated output directories:
 
 ```bash
-python3 .agents/skills/google-cloud-architecture-diagram/evals/scripts/validate_eval.py <eval_id> <output_dir>
+python3 evals/scripts/validate_eval.py <eval_id> <output_dir>
 ```
 
 #### The 10 Automated Assertion Checks:
