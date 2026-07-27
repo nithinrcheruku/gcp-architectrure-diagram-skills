@@ -25,17 +25,21 @@ cd gcp-architecture-diagram-skills
 
 ### 1. Antigravity 2.0 (Desktop Application & Antigravity IDE)
 
-#### Installation:
-Run `./install.sh` from your terminal. The script registers the skill at `~/.gemini/antigravity/skills/google-cloud-architecture-diagram`.
+#### Installation & Activation:
+1. Run `./install.sh` from your terminal. The script registers the skill at `~/.gemini/antigravity/skills/google-cloud-architecture-diagram`.
+2. **Reloading Skills in AGY 2.0**:
+   - If Antigravity 2.0 or Antigravity IDE is already running, reload customizations to pick up the new skill:
+     - Open **Settings $\rightarrow$ Customizations $\rightarrow$ Skills** and click **Reload Skills**, OR
+     - Press `Cmd+Shift+P` / `Ctrl+Shift+P` and run **`Antigravity: Reload Customizations`** (or restart AGY 2.0).
+3. **Verify Activation**: Confirm `google-cloud-architecture-diagram` is toggled **ON** in your **Active Skills** list under Settings $\rightarrow$ Customizations $\rightarrow$ Skills.
 
 #### How to Use in Antigravity 2.0 UI:
-1. Open **Antigravity 2.0** or **Antigravity IDE**.
-2. Open the AI Chat Sidebar or launch a conversation turn.
-3. Simply ask Antigravity in plain English:
+1. Open the AI Chat Sidebar or launch a conversation turn.
+2. Simply ask Antigravity in plain English:
    > *"Draw a publication-quality GCP architecture diagram for my multi-tenant agentic AI system with Cloud Run and AlloyDB."*
-4. Or explicitly invoke the skill using the dollar sign:
+3. Or explicitly invoke the skill using the dollar sign:
    > *"$google-cloud-architecture-diagram draw a hub-and-spoke VPC network on Google Cloud"*
-5. **View Results**: Antigravity will generate the diagram and display the interactive HTML canvas directly inside the **HTML Auxiliary Pane** / **Artifact Viewer**.
+4. **View Results**: Antigravity will generate the diagram and display the interactive HTML canvas directly inside the **HTML Auxiliary Pane** / **Artifact Viewer**.
 
 ---
 
