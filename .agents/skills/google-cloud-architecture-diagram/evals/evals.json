@@ -1,0 +1,161 @@
+{
+  "skill_name": "google-cloud-architecture-diagram",
+  "version": "1.0.0",
+  "description": "Evaluation test suite for Google Cloud Architecture Diagram generation skill grounded in official Google Cloud Architecture Center standards.",
+  "evals": [
+    {
+      "id": "eval-01-explicit-agentic",
+      "typology": "explicit_invocation",
+      "domain": "AI & Agentic AI Systems",
+      "prompt": "Use $google-cloud-architecture-diagram to draw a multi-tenant Agentic AI system on Google Cloud following official Architecture Center patterns.",
+      "expected_output": "A publication-quality SVG diagram and interactive HTML matching official Google Cloud Architecture Center multi-tenant agentic AI standards.",
+      "assertions": [
+        "The output contains a valid standalone SVG element with a viewBox attribute",
+        "Components are horizontally aligned across a 6-tier grid (Access, Edge, Gateway, Compute, Egress, Datastore)",
+        "PEP data flow lines use solid blue stroke (#4285F4 or #1A73E8) with numbered sequence badges",
+        "PDP policy lookup lines use dashed indigo stroke (#7986CB)",
+        "Includes a VPC Service Controls perimeter container with dashed red border (#EA4335)",
+        "Compute nodes use blue stroke (#4284F3), Database nodes use green stroke (#34A853), Security nodes use red stroke (#EA4335)"
+      ]
+    },
+    {
+      "id": "eval-02-explicit-autoscan",
+      "typology": "explicit_invocation",
+      "domain": "Application Modernization & Serverless",
+      "prompt": "Run skill google-cloud-architecture-diagram on 'analyze' mode for terraform in evals/files/terraform/",
+      "files": ["evals/files/terraform/main.tf"],
+      "expected_output": "Extracted infrastructure topology from main.tf rendered as a Google Cloud architecture diagram.",
+      "assertions": [
+        "Discovers and extracts Cloud Run, Cloud SQL, Cloud Armor, and Cloud KMS resources from main.tf",
+        "Generates a valid SVG diagram with correct resource containment inside GCP project and VPC containers",
+        "Assigns correct category color tokens to extracted resources (Compute: #4284F3, DB: #34A853, Security: #EA4335)"
+      ]
+    },
+    {
+      "id": "eval-03-implicit-zerotrust",
+      "typology": "implicit_trigger",
+      "domain": "Zero Trust & Security Perimeters",
+      "prompt": "I need a publication-grade GCP architecture diagram showing Cloud Armor, ALB, Cloud Run sandboxes, AlloyDB row isolation, and VPC-SC perimeter.",
+      "expected_output": "A complete 6-tier GCP architecture diagram with zero-trust security components.",
+      "assertions": [
+        "Triggers the google-cloud-architecture-diagram skill",
+        "Includes Cloud Armor and ALB in Edge Security Tier",
+        "Includes Cloud Run gVisor sandboxes in Compute Tier",
+        "Includes AlloyDB in Datastore Tier with row isolation label",
+        "Encloses backend tier in a VPC Service Controls perimeter (#FCE8E6 fill, #EA4335 dashed border)"
+      ]
+    },
+    {
+      "id": "eval-04-implicit-multitenant",
+      "typology": "implicit_trigger",
+      "domain": "Multi-Tenant SaaS & Data Isolation",
+      "prompt": "Can you visualize how my multi-tenant e-commerce backend running on GKE and Cloud SQL should connect to Cloud KMS CMEK key rings and IAP?",
+      "expected_output": "Multi-tenant e-commerce architecture diagram with KMS CMEK key rings and IAP.",
+      "assertions": [
+        "Triggers the google-cloud-architecture-diagram skill",
+        "Includes GKE microservices in Compute Tier",
+        "Includes Cloud SQL in Datastore Tier",
+        "Includes Cloud KMS CMEK Key Ring card with yellow fill (#FEF7E0) and yellow stroke (#F9AB00)",
+        "Includes IAP proxy in Edge Security Tier"
+      ]
+    },
+    {
+      "id": "eval-05-implicit-rag-pipeline",
+      "typology": "implicit_trigger",
+      "domain": "AI & Agentic AI Systems",
+      "prompt": "Generate a Google Cloud diagram for our Generative AI RAG data pipeline with BigQuery, Vertex AI, Dataflow, and Pub/Sub inside a service perimeter.",
+      "expected_output": "Generative AI RAG pipeline architecture diagram on GCP.",
+      "assertions": [
+        "Triggers the google-cloud-architecture-diagram skill",
+        "Includes Pub/Sub, Dataflow, BigQuery, and Vertex AI components",
+        "Applies correct product category colors (Vertex AI/Dataflow Compute: #4284F3, BigQuery DB: #34A853)",
+        "Uses sequential numbered badges on data pipeline flow arrows"
+      ]
+    },
+    {
+      "id": "eval-06-implicit-hubspoke",
+      "typology": "implicit_trigger",
+      "domain": "Networking & Hub-and-Spoke Topologies",
+      "prompt": "Draw a hub-and-spoke VPC network topology for Google Cloud with Private Service Connect and Cloud Interconnect.",
+      "expected_output": "Hub-and-spoke VPC architecture diagram matching GCP networking standards.",
+      "assertions": [
+        "Triggers the google-cloud-architecture-diagram skill",
+        "Displays Central Hub VPC container (#ECEFF1 fill, #90A4AE stroke) connected to Spoke VPC containers",
+        "Includes Private Service Connect endpoints and Cloud Interconnect components",
+        "Follows VPC containment and subnet layout rules"
+      ]
+    },
+    {
+      "id": "eval-07-implicit-secfoundations",
+      "typology": "implicit_trigger",
+      "domain": "Enterprise Security Foundations",
+      "prompt": "Create a GCP security architecture diagram showing Organization Folders, CMEK Key Rings, Security Command Center, and Cloud Audit Logs.",
+      "expected_output": "Security foundations architecture diagram following GCP blueprint guidelines.",
+      "assertions": [
+        "Triggers the google-cloud-architecture-diagram skill",
+        "Includes Central Governance Hub project container",
+        "Includes Security Command Center, Cloud Logging/Audit, and CMEK Key Rings",
+        "Uses correct Security (#EA4335) and Identity/KMS (#F9AB00) color tokens"
+      ]
+    },
+    {
+      "id": "eval-08-noisy-agentic",
+      "typology": "contextual_noisy",
+      "domain": "AI & Agentic AI Systems",
+      "prompt": "Hey team, we're auditing our GCP setup. Here's a messy dump: customer wants us to use us-central1, Cloud Run microservices, Firestore for session state, and strict PEP/PDP gateway isolation for tenant tokens. Make a diagram for our security review meeting.",
+      "expected_output": "Clean GCP architecture diagram synthesized from messy user dump.",
+      "assertions": [
+        "Triggers the google-cloud-architecture-diagram skill despite noisy phrasing",
+        "Extracts Cloud Run, Firestore, and PEP/PDP gateway isolation components",
+        "Renders region boundary label us-central1",
+        "Applies 6-tier layout and solid/dashed line distinctions for PEP/PDP"
+      ]
+    },
+    {
+      "id": "eval-09-noisy-terraform",
+      "typology": "contextual_noisy",
+      "domain": "Application Modernization & Serverless",
+      "prompt": "Look at our terraform main.tf in evals/files/terraform/main.tf. We have multiple GCP subnets, gVisor microVMs, and egress gateways. Auto-scan this and output an interactive HTML canvas.",
+      "files": ["evals/files/terraform/main.tf"],
+      "expected_output": "Parsed Terraform topology rendered into an interactive HTML diagram.",
+      "assertions": [
+        "Triggers the google-cloud-architecture-diagram skill",
+        "Parses main.tf file and identifies gVisor microVMs, subnets, and egress gateways",
+        "Outputs both SVG and interactive HTML view"
+      ]
+    },
+    {
+      "id": "eval-10-neg-codefix",
+      "typology": "negative_control",
+      "domain": "General Software Development",
+      "prompt": "Can you fix a syntax error in my Python Flask script?",
+      "expected_output": "Python code fix provided directly without triggering architecture diagram skills.",
+      "assertions": [
+        "Does NOT trigger the google-cloud-architecture-diagram skill",
+        "Fixes the Python Flask code directly"
+      ]
+    },
+    {
+      "id": "eval-11-neg-aws",
+      "typology": "negative_control",
+      "domain": "AWS Cloud Infrastructure",
+      "prompt": "Write a Terraform module to create an S3 bucket and DynamoDB table on AWS.",
+      "expected_output": "AWS Terraform HCL code without triggering GCP diagram skill.",
+      "assertions": [
+        "Does NOT trigger the google-cloud-architecture-diagram skill",
+        "Outputs valid AWS Terraform HCL"
+      ]
+    },
+    {
+      "id": "eval-12-neg-concept",
+      "typology": "negative_control",
+      "domain": "Kubernetes Concepts",
+      "prompt": "Describe how Kubernetes Pod Security Standards work in standard markdown text.",
+      "expected_output": "Markdown explanation of Kubernetes Pod Security Standards without SVG/HTML diagram generation.",
+      "assertions": [
+        "Does NOT trigger the google-cloud-architecture-diagram skill",
+        "Provides clear markdown text explanation"
+      ]
+    }
+  ]
+}
