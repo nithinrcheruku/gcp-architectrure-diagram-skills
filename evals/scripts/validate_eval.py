@@ -48,24 +48,24 @@ def validate_svg_file(svg_path):
         "evidence": "Found Google Cloud header band with #1A73E8 title" if has_header else "Missing Google Cloud header band"
     })
 
-    # Check 4: Multi-Project Container Nesting (#F6F6F6 fill, #BDBDBD stroke, or 'PROJECT:')
-    has_projects = (('#f6f6f6' in content.lower() and '#bdbdbd' in content.lower() and 'rx="8"' in content.lower()) or 'project:' in content.lower())
+    # Check 4: Multi-Project Container Nesting (#F6F6F6 fill, #BDBDBD stroke, rx="8")
+    has_projects = '#f6f6f6' in content.lower() and '#bdbdbd' in content.lower() and 'rx="8"' in content.lower()
     results.append({
         "id": "gcp_project_containers",
         "pass": has_projects,
         "evidence": "Found isolated GCP Project containers (#F6F6F6 / #BDBDBD / rx=8)" if has_projects else "Missing GCP Project containers"
     })
 
-    # Check 5: Regional VPC Network Containers (#ECEFF1 fill, #90A4AE stroke, or 'REGION:')
-    has_vpcs = (('#eceff1' in content.lower() and '#90a4ae' in content.lower() and 'rx="6"' in content.lower()) or ('region:' in content.lower() or 'vpc' in content.lower()))
+    # Check 5: Regional VPC Network Containers (#ECEFF1 fill, #90A4AE stroke, rx="6")
+    has_vpcs = '#eceff1' in content.lower() and '#90a4ae' in content.lower() and 'rx="6"' in content.lower()
     results.append({
         "id": "regional_vpc_containers",
         "pass": has_vpcs,
         "evidence": "Found Regional VPC Network containers (#ECEFF1 / #90A4AE / rx=6)" if has_vpcs else "Missing Regional VPC Network containers"
     })
 
-    # Check 6: Subnet Isolation Zones (#EDE7F6 fill, #5E35B1 stroke, or 'Subnet:')
-    has_subnets = (('#ede7f6' in content.lower() and '#5e35b1' in content.lower() and 'rx="4"' in content.lower()) or 'subnet' in content.lower())
+    # Check 6: Subnet Isolation Zones (#EDE7F6 fill, #5E35B1 stroke, rx="4")
+    has_subnets = '#ede7f6' in content.lower() and '#5e35b1' in content.lower() and 'rx="4"' in content.lower()
     results.append({
         "id": "subnet_isolation_zones",
         "pass": has_subnets,
