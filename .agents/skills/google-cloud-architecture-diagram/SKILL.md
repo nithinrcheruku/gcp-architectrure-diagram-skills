@@ -22,7 +22,17 @@ Every generated diagram MUST render the full 5-level nested GCP container hierar
 4. **VPC Subnet Isolation Zones**: Subnet containers (`#EDE7F6` fill, `#5E35B1` stroke, `rx="4"`) with zone labels (e.g., `VPC Subnet: Compute Sandbox Zone`).
 5. **VPC Service Controls (VPC-SC) Perimeters**: Red dashed perimeters (`#FCE8E6` fill, `#EA4335` stroke, `stroke-dasharray="5,3"`) enfolding tenant data & compute workloads.
 
-## 3. Operating Modes & Grounding
+## 3. High-Fidelity Structured Product Card Anatomy
+
+To prevent crude flat-box generation, every GCP product node MUST be rendered as a structured publication card:
+- **Outer Card Frame**: `<rect fill="#FFFFFF" stroke="<category-color>" stroke-width="1.5" rx="4"/>`
+- **Card Accent Header**: `<rect x="<x>" y="<y>" width="<w>" height="8" rx="4" fill="<category-color>"/>`
+- **Category Icon / Symbol**: Embedded SVG vector icon from `assets/category-icons/` or `<path>` symbol.
+- **Product Title**: Bold 10pt text in category dark shade (Compute: `#1A56C4`, DB: `#1E7B34`, Security: `#C5221F`, KMS: `#B06000`).
+- **Subtitle / Role**: 8pt text (`fill="#5F6368"`) detailing component responsibility.
+- **Parameter Pill Badge**: `<rect rx="3" fill="#E8F0FE" stroke="#AECBFA"/>` with 7.5pt uppercase text (e.g., `GVISOR MICROVM`, `ROW isolation`, `CMEK KEY RING`).
+
+## 4. Operating Modes & Grounding
 
 ### Mode A: Codebase Infrastructure Analysis ("scan", "analyze", "from code")
 1. Search codebase for Terraform (`*.tf`), K8s manifests, Cloud Run (`service.yaml`), or Helm. See [export-and-codebase-parser.md](references/export-and-codebase-parser.md).
@@ -33,7 +43,7 @@ Every generated diagram MUST render the full 5-level nested GCP container hierar
 1. Query `google-developer-knowledge` MCP server (`search_documents`) for relevant GCP Architecture Center topologies (`multi-tenant-agentic-ai-system`, `rag-capable-gen-ai-app-gemini-enterprise-vertexai-detail`, `security-foundations`).
 2. Propose multi-tenant Hub-and-Spoke project layout, PEP/PDP enforcement points, and datastore isolation strategy.
 
-## 4. Color Tokens & Line Semantics
+## 5. Color Tokens & Line Semantics
 
 - **Product Category Tokens**:
   - Compute / Serverless: Fill `#FFFFFF`, Stroke `#4284F3` (Google Blue).
@@ -45,7 +55,8 @@ Every generated diagram MUST render the full 5-level nested GCP container hierar
   - PDP Policy Calls: Dashed `#7986CB` arrows (`stroke-dasharray="4,3"`).
   - Sequence Badges: Circular numbered badges (`1`, `2`, `3`...) attached to every connection line. See [containment-and-layout-rules.md](references/containment-and-layout-rules.md) and [security-and-compliance-rules.md](references/security-and-compliance-rules.md).
 
-## 5. Output Deliverables
-- Standalone valid SVG (`viewBox="0 0 1280 820"`).
-- Interactive HTML in `index.html`.
+## 6. Output Deliverables
+- Standalone valid SVG with minimum canvas dimensions (`viewBox="0 0 1280 820"`).
+- Interactive HTML presentation in `index.html`.
 - High-definition PNGs generated via `generate_image` anchored by local assets in `assets/category-icons/`.
+

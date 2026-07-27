@@ -114,7 +114,25 @@ def validate_svg_file(svg_path):
         "evidence": "VPC-SC perimeter formatted with dashed red border" if has_perimeter else "No VPC-SC perimeter found"
     })
 
+    # Check 11: Structured Product Cards (rx="4" or rx="3" cards with headers or badges)
+    has_structured_cards = ('rx="4"' in content.lower() or 'rx="3"' in content.lower()) and ('fill="#ffffff"' in content.lower() or 'fill="#fff"' in content.lower())
+    results.append({
+        "id": "structured_product_cards",
+        "pass": has_structured_cards,
+        "evidence": "Found structured product cards with rounded corners and white fill" if has_structured_cards else "Missing structured product cards"
+    })
+
+    # Check 12: Standard Canvas Aspect Ratio / ViewBox Width (>= 1200)
+    vb_match = re.search(r'viewBox=["\']0\s+0\s+(\d+)\s+(\d+)["\']', content, re.I)
+    valid_canvas = bool(vb_match and int(vb_match.group(1)) >= 1200)
+    results.append({
+        "id": "canvas_aspect_ratio",
+        "pass": valid_canvas,
+        "evidence": f"Canvas width is {vb_match.group(1)}px (>= 1200px)" if vb_match else "ViewBox missing or width < 1200px"
+    })
+
     return results
+
 
 def main():
     if len(sys.argv) < 3:
