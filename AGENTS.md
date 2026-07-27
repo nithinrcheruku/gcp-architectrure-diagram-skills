@@ -11,9 +11,18 @@ AI Agents operating in this codebase or utilizing these skills MUST follow the r
 ```
 /Users/nrcheruku/sourcecode/work/gcp-architectrure-diagram-skills/
 ├── AGENTS.md                                                  # [This File] Primary operational guide for AI agents
+├── README.md                                                  # User documentation & installation guide
+├── install.sh                                                 # 1-Click Antigravity installer script
+├── evals/                                                     # Benchmark Evaluation & Validation Framework
+│   ├── evals.json                                             # 12 Benchmark Scenarios (Explicit, Implicit, Noisy, Neg)
+│   ├── style-rubric.schema.json                               # Schema for Eval Assertions
+│   ├── scripts/
+│   │   └── validate_eval.py                                   # Automated 10-Check SVG Assertion Validator
+│   └── files/
+│       └── terraform/main.tf                                  # Terraform sample for IaC auto-scan testing
 └── .agents/
     └── skills/
-        └── google-cloud-architecture-diagram/                 # Main Skill Package
+        └── google-cloud-architecture-diagram/                 # Runtime Skill Package (Lightweight & Self-Contained)
             ├── SKILL.md                                       # Primary Skill Definition & Trigger Instructions
             ├── references/                                    # Grounded Technical Reference Specifications
             │   ├── containment-and-layout-rules.md           # 5-Tier Hierarchy, Geometry Math, Line Semantics
@@ -24,15 +33,8 @@ AI Agents operating in this codebase or utilizing these skills MUST follow the r
             │   ├── ArchitectureDS.pdf                         # Google Cloud Diagram Style Guide V2.5 Specification
             │   ├── multiagent-ai-system-architecture.png      # Reference Blueprint: Multi-Tenant Agentic AI
             │   └── gen-ai-rag-vertex-ai-vector-search-detailed-architecture.png
-            ├── assets/                                        # Official GCP Product Category Icons
-            │   └── category-icons/                            # Category Icons (SVG & 512x512 PNG)
-            └── evals/                                         # Benchmark Evaluation & Validation Engine
-                ├── evals.json                                 # 12 Benchmark Scenarios (Explicit, Implicit, Noisy, Neg)
-                ├── style-rubric.schema.json                   # Schema for Eval Assertions
-                ├── scripts/
-                │   └── validate_eval.py                       # Automated 10-Check SVG Assertion Validator
-                └── files/
-                    └── terraform/main.tf                      # Terraform sample for IaC auto-scan testing
+            └── assets/                                        # Official GCP Product Category Icons
+                └── category-icons/                            # Category Icons (SVG & 512x512 PNG)
 ```
 
 ---
