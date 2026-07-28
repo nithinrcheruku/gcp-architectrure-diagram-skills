@@ -133,6 +133,28 @@ def validate_svg_file(svg_path):
 
     return results
 
+def validate_output_directory(output_dir):
+    results = []
+    
+    # Check 13: High-Definition PNG Image Artifact (generated via generate_image tool / Gemini Pro)
+    png_files = [f for f in os.listdir(output_dir) if f.endswith('.png')] if os.path.exists(output_dir) else []
+    has_image = len(png_files) > 0
+    results.append({
+        "id": "gemini_pro_image_artifact",
+        "pass": has_image,
+        "evidence": f"Found Gemini Pro / Imagen generated PNG image artifacts: {png_files}" if has_image else "Missing PNG image artifact (generate_image tool call required)"
+    })
+
+    # Check 14: Interactive HTML Presentation Canvas
+    html_file = os.path.join(output_dir, "index.html")
+    has_html = os.path.exists(html_file)
+    results.append({
+        "id": "html_presentation_canvas",
+        "pass": has_html,
+        "evidence": f"Found index.html presentation canvas in {output_dir}" if has_html else "Missing index.html presentation canvas"
+    })
+
+    return results
 
 def main():
     if len(sys.argv) < 3:
@@ -145,11 +167,12 @@ def main():
     # Negative control checks
     if "neg" in eval_id:
         svg_files = [f for f in os.listdir(output_dir) if f.endswith('.svg')] if os.path.exists(output_dir) else []
-        passed = len(svg_files) == 0
+        png_files = [f for f in os.listdir(output_dir) if f.endswith('.png')] if os.path.exists(output_dir) else []
+        passed = len(svg_files) == 0 and len(png_files) == 0
         res = [{
             "id": "negative_control_passed",
             "pass": passed,
-            "evidence": f"Zero SVG diagrams generated (correct behavior for negative control)" if passed else f"Unexpectedly generated {svg_files}"
+            "evidence": "Zero diagram artifacts generated (correct behavior for negative control)" if passed else f"Unexpectedly generated {svg_files + png_files}"
         }]
     else:
         svg_file = os.path.join(output_dir, "diagram.svg")
@@ -157,7 +180,9 @@ def main():
             svg_files = [os.path.join(output_dir, f) for f in os.listdir(output_dir) if f.endswith('.svg')] if os.path.exists(output_dir) else []
             svg_file = svg_files[0] if svg_files else svg_file
 
-        res = validate_svg_file(svg_file)
+        res = validate_svg_file(svg_file) if os.path.exists(svg_file) else []
+        dir_res = validate_output_directory(output_dir)
+        res.extend(dir_res)
 
     passed_count = sum(1 for r in res if r["pass"])
     total_count = len(res)
@@ -175,3 +200,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

@@ -110,7 +110,7 @@ Run the automated validator on generated output directories:
 python3 evals/scripts/validate_eval.py <eval_id> <output_dir>
 ```
 
-#### The 12 Automated Assertion Checks:
+#### The 14 Automated Assertion Checks:
 1. `valid_svg_xml`: Valid XML structure and `<svg>` root tag.
 2. `has_viewbox`: Contains explicit `viewBox` attribute (e.g., `viewBox="0 0 1280 820"`).
 3. `gcp_brand_header`: Includes Google Blue (`#1A73E8`) header title band.
@@ -123,6 +123,9 @@ python3 evals/scripts/validate_eval.py <eval_id> <output_dir>
 10. `vpc_sc_perimeter`: Contains VPC Service Controls red dashed perimeter (`#EA4335` / `#FCE8E6`).
 11. `structured_product_cards`: Uses structured publication cards with white fill and rounded corners (`rx="4"`/`rx="3"`).
 12. `canvas_aspect_ratio`: Enforces full-resolution canvas viewBox width ($\ge 1200\text{px}$).
+13. `gemini_pro_image_artifact`: Generates high-definition PNG image artifact via `generate_image` tool (Gemini Pro / Imagen 3).
+14. `html_presentation_canvas`: Generates interactive `index.html` presentation canvas.
+
 
 
 ### C. Skill Optimization Lifecycle for Agents
