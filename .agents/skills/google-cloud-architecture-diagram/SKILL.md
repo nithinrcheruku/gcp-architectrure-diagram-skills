@@ -1,6 +1,6 @@
 ---
 name: google-cloud-architecture-diagram
-description: Generates publication-quality, standard-compliant Google Cloud architecture diagram image artifacts via mandatory generate_image tool call (powered by Gemini Pro / Imagen 3) grounded in official Google Cloud Architecture Center standards (docs.cloud.google.com/architecture).
+description: Generates publication-quality, standard-compliant Google Cloud architecture diagram image artifacts via mandatory 4-stage deep architectural reasoning and generate_image tool call (powered by Gemini Pro / Imagen 3) grounded in official Google Cloud Architecture Center standards (docs.cloud.google.com/architecture).
 argument-hint: "[describe any GCP architecture or say 'analyze' to scan codebase]"
 ---
 
@@ -13,21 +13,52 @@ Generates publication-quality Google Cloud architecture diagrams complying stric
 - Do NOT trigger for non-GCP cloud providers (e.g., AWS S3/DynamoDB or Azure infrastructure).
 - Do NOT trigger for pure text conceptual questions where no visual architecture diagram is requested.
 
-## 2. Mandatory Execution Protocol (Gemini Pro / Imagen 3 Image Grounding)
+## 2. Mandatory 4-Stage Deep Architectural Execution Protocol
 
-To ensure 100% visual consistency and publication quality without crude hand-coded text boxes, the agent MUST generate high-definition image artifacts via Gemini Pro / Imagen 3:
+To eliminate superficial diagrams and enforce publication-quality technical accuracy for unseen or complex architectures, the agent MUST execute the following 4 stages sequentially:
 
-### STEP 1: High-Definition Image Generation (`generate_image` Tool Call)
-1. **MANDATORY TOOL CALL**: You MUST call the `generate_image` tool to generate a stunning, publication-grade, high-resolution visual architecture diagram powered by Imagen 3 / Gemini Pro vision models.
-2. **Anchor with Product Icons**: Pass absolute paths to local GCP product category icons in `ImagePaths` (from `assets/category-icons/Category Icons/`) so the image generation model anchors to official Google Cloud branding.
-3. **Prompt Mandates**: Prompt MUST explicitly detail:
-   - Official Google Cloud Architecture Center diagram style guide standards (16:9 or 1280x820 aspect ratio).
-   - 5-level container hierarchy (Google Blue title band `#1A73E8`, GCP Projects `#F6F6F6`, Regional VPCs `#ECEFF1`, Subnet isolation zones `#EDE7F6`, VPC-SC dashed red perimeters `#EA4335`).
-   - Clean 6-tier horizontal flow, rounded product cards with category color headers, distinct PEP/PDP lifeline arrows, and sequence circle badges.
+---
 
-### STEP 2: HTML Presentation Wrapper
+### STAGE 1: Domain Grounding & Topology Research
+1. Query `google-developer-knowledge` MCP server (`search_documents`) for the target domain (e.g. multi-tenant SaaS control/compute/data plane, agentic AI, zero-trust perimeters).
+2. Identify official GCP product recommendations, security boundary patterns, and networking connectors (e.g. Private Service Connect, ALB, IAP, gVisor, CMEK Key Rings, VPC-SC).
+
+---
+
+### STAGE 2: Deep Architecture Thinking & Visual Layout Blueprint (REQUIRED REASONING STEP)
+Before calling any image generation tools, the agent **MUST** explicitly formulate and write out a **Structured Visual Layout Specification**:
+1. **Multi-Project Hub-and-Spoke Boundaries**: Define exact GCP Project boundaries (e.g., `proj-control-plane-prod`, `proj-shared-compute-prod`, `proj-shared-data-prod`).
+2. **Network & Subnet Topology**: Map regional VPC networks, subnets, and private connectivity (PSC endpoints, Workload Identity Federation, Egress Proxies).
+3. **5-Level Nested Containment Tree**: Detail parent-child hierarchy (Brand Header $\rightarrow$ Projects $\rightarrow$ Regional VPCs $\rightarrow$ Subnets $\rightarrow$ VPC-SC Perimeters).
+4. **Complete Node Inventory**: List EVERY product node with:
+   - Product Name (e.g., `AlloyDB for PostgreSQL`, `Vertex AI Agent Builder`, `Cloud Armor WAF`).
+   - Category Color Token (`Compute=#4284F3`, `DB/Analytics=#34A853`, `Security=#EA4335`, `KMS/Identity=#F9AB00`).
+   - Subtitle Role (e.g., `Primary Policy Enforcement Point`, `HSM CMEK Key Enforcer`).
+   - Parameter Pill Badge (e.g., `ROW LEVEL SECURITY`, `GVISOR MICROVM`, `TENANT JWT CLAIMS`).
+   - Grid Tier Position (`Tier 1: Access` $\rightarrow$ `Tier 2: Edge` $\rightarrow$ `Tier 3: Ingress` $\rightarrow$ `Tier 4: Compute` $\rightarrow$ `Tier 5: Egress` $\rightarrow$ `Tier 6: Datastore`).
+5. **Transaction Lifelines & Sequence Badges**: Map step-by-step transaction flows (`1`, `2`, `3`...) indicating PEP data paths (solid blue `#4285F4`), PDP policy calls (dashed indigo `#7986CB`), and payload labels (`Tenant JWT Token`, `CMEK Lookup`).
+
+---
+
+### STAGE 3: Hyper-Detailed Image Generation (`generate_image` Tool Call)
+1. **MANDATORY TOOL CALL**: Pass the Stage 2 Visual Layout Blueprint as a comprehensive, multi-paragraph 500+ word prompt to `generate_image`.
+2. **Anchor with Product Icons**: Pass absolute paths to local GCP product category icons in `ImagePaths` (from `assets/category-icons/Category Icons/`) so the Gemini Pro / Imagen 3 model anchors to official Google Cloud visual identity.
+3. **Style Mandates**: Prompt MUST mandate:
+   - High-resolution publication diagram (1280x820 or 16:9 aspect ratio).
+   - Crisp Google Blue (`#1A73E8`) header title band.
+   - Distinct project containers (`#F6F6F6` fill, `#BDBDBD` stroke, `rx="8"`).
+   - Regional VPCs (`#ECEFF1` fill, `#90A4AE` stroke, `rx="6"`).
+   - Subnet zones (`#EDE7F6` fill, `#5E35B1` stroke, `rx="4"`).
+   - Red dashed VPC-SC perimeters (`#FCE8E6` fill, `#EA4335` stroke).
+   - Structured product cards with white fill, category-colored top accent bars, parameter pills, rounded corners, and clear connection arrows with numbered circle badges.
+
+---
+
+### STAGE 4: Interactive HTML Presentation Canvas
 1. Save the generated high-definition PNG image artifact as `diagram.png`.
-2. Create an `index.html` presentation canvas that embeds `<img src="diagram.png">` inside a sleek, responsive preview container with zoom, pan, and full-screen controls.
+2. Create an `index.html` presentation canvas embedding `<img src="diagram.png">` inside a responsive, zoomable preview container.
+
+---
 
 ## 3. Universal 5-Level Container Hierarchy (100% GCP Architecture Center Standard)
 
@@ -51,25 +82,14 @@ Components across ANY GCP architecture MUST be organized left-to-right or top-to
 ## 5. High-Fidelity Structured Product Card Anatomy
 
 Every GCP product node MUST be rendered as a structured publication card:
-- **Outer Card Frame**: `<rect fill="#FFFFFF" stroke="<category-color>" stroke-width="1.5" rx="4"/>`
-- **Card Accent Header**: `<rect x="<x>" y="<y>" width="<w>" height="8" rx="4" fill="<category-color>"/>`
+- **Outer Card Frame**: White background with 1.5pt category stroke and rounded corners (`rx="4"`).
+- **Card Accent Header**: Category-colored top accent bar.
 - **Category Icon / Symbol**: Official GCP Product Category Icon from `assets/category-icons/`.
 - **Product Title**: Bold text in category dark shade (Compute: `#1A56C4`, DB/Analytics: `#1E7B34`, Security: `#C5221F`, KMS/Identity: `#B06000`).
 - **Subtitle / Role**: Details component responsibility.
 - **Parameter Pill Badge**: Parameter pill with uppercase text (e.g., `GVISOR MICROVM`, `ROW ISOLATION`, `CMEK KEY RING`, `PSC ENDPOINT`).
 
-## 6. Operating Modes & Grounding
-
-### Mode A: Codebase Infrastructure Analysis ("scan", "analyze", "from code")
-1. Search codebase for Terraform (`*.tf`), K8s manifests, Cloud Run (`service.yaml`), or Helm. See [export-and-codebase-parser.md](references/export-and-codebase-parser.md).
-2. Extract project boundaries, subnets, database connections, and IAM roles.
-3. Map extracted resources into Hub-and-Spoke GCP Project containers and generate image via `generate_image`.
-
-### Mode B: Interactive Design & Brainstorming
-1. Query `google-developer-knowledge` MCP server (`search_documents`) for relevant GCP Architecture Center topologies matching the prompt domain.
-2. Propose multi-project layout, PEP/PDP enforcement points, and datastore isolation strategy, then generate image via `generate_image`.
-
-## 7. Product Category Tokens & Line Semantics
+## 6. Product Category Tokens & Line Semantics
 
 - **Product Category Tokens**:
   - Compute / Serverless: Fill `#FFFFFF`, Stroke `#4284F3` (Google Blue).
@@ -81,6 +101,6 @@ Every GCP product node MUST be rendered as a structured publication card:
   - PDP Policy Calls: Dashed `#7986CB` arrows (`stroke-dasharray="4,3"`).
   - Sequence Badges: Circular numbered badges (`1`, `2`, `3`...) attached to every connection line. See [containment-and-layout-rules.md](references/containment-and-layout-rules.md) and [security-and-compliance-rules.md](references/security-and-compliance-rules.md).
 
-## 8. Output Deliverables
-- **High-Definition PNG Graphic (`diagram.png`)**: Generated via mandatory `generate_image` tool call.
+## 7. Output Deliverables
+- **High-Definition PNG Graphic (`diagram.png`)**: Generated via mandatory `generate_image` tool call following the 4-stage deep architecture execution protocol.
 - **Presentation Workspace (`index.html`)**: HTML wrapper displaying `diagram.png` in a responsive viewer.
