@@ -16,26 +16,28 @@ AI Agents operating in this codebase or utilizing these skills MUST follow the r
 ├── evals/                                                     # Benchmark Evaluation & Validation Framework
 │   ├── evals.json                                             # 12 Benchmark Scenarios (Explicit, Implicit, Noisy, Neg)
 │   ├── style-rubric.schema.json                               # Schema for Eval Assertions
+│   ├── resources/                                             # Benchmark Reference Images (Agentic AI, RAG)
+│   │   ├── multiagent-ai-system-architecture.png
+│   │   └── gen-ai-rag-vertex-ai-vector-search-detailed-architecture.png
 │   ├── scripts/
-│   │   └── validate_eval.py                                   # Automated 10-Check SVG Assertion Validator
+│   │   └── validate_eval.py                                   # Automated 12-Check SVG Assertion Validator
 │   └── files/
 │       └── terraform/main.tf                                  # Terraform sample for IaC auto-scan testing
 └── .agents/
     └── skills/
-        └── google-cloud-architecture-diagram/                 # Runtime Skill Package (Lightweight & Self-Contained)
-            ├── SKILL.md                                       # Primary Skill Definition & Trigger Instructions
+        └── google-cloud-architecture-diagram/                 # Runtime Skill Package (Universal & Self-Contained)
+            ├── SKILL.md                                       # Universal Skill Definition & Trigger Instructions
             ├── references/                                    # Grounded Technical Reference Specifications
             │   ├── containment-and-layout-rules.md           # 5-Tier Hierarchy, Geometry Math, Line Semantics
             │   ├── gcp-product-icons-and-colors.md           # Official GCP Color Tokens, Fonts, Cards
             │   ├── security-and-compliance-rules.md          # Zero-Trust, VPC-SC, PEP/PDP, Sequence Badges
             │   └── export-and-codebase-parser.md             # IaC Scanner (TF/K8s/Run) & Multi-Format Exporters
-            ├── resources/                                     # Grounding Reference Documentation & PDFs
-            │   ├── ArchitectureDS.pdf                         # Google Cloud Diagram Style Guide V2.5 Specification
-            │   ├── multiagent-ai-system-architecture.png      # Reference Blueprint: Multi-Tenant Agentic AI
-            │   └── gen-ai-rag-vertex-ai-vector-search-detailed-architecture.png
+            ├── resources/                                     # Grounding Technical Specifications & PDFs
+            │   └── ArchitectureDS.pdf                         # Google Cloud Diagram Style Guide V2.5 Specification
             └── assets/                                        # Official GCP Product Category Icons
-                └── category-icons/                            # Category Icons (SVG & 512x512 PNG)
+                └── category-icons/                            # 26 Product Category Icons (SVG & 512x512 PNG)
 ```
+
 
 ---
 
